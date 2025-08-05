@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +20,14 @@ const Navbar = () => {
   const handleMenuItemClick = (sectionId) => {
     setActiveSection(sectionId);
     setIsOpen(false);
+
+      const section = document.getElementById(sectionId);
+  if(section){
+    section.scrollIntoView({behavior:"smooth"});
+  }
   };
+
+
 
   const menuItems = [
     { id: "about", label: "About" },
@@ -31,10 +39,10 @@ const Navbar = () => {
 
   return (
     <nav
+      style={isScrolled ? { backgroundColor: "rgba(5, 4, 20, 0.5)" } : {}}
       className={`w-full top-0 z-50 fixed transition duration-300 px-[7vw] lg:px-[20vw] ${
         isScrolled
-          ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md"
-          : "bg-transparent"
+          ?" backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
       <div className="text-white py-5 flex justify-between items-center">
@@ -51,7 +59,7 @@ const Navbar = () => {
           {menuItems.map((item) => (
             <li
               key={item.id}
-              className={` hover:text-[#8245ec] ${
+              className={`cursor-pointer hover:text-[#8245ec] ${
                 activeSection === item.id ? "text-[#8245ec]" : ""
               }`}
             >

@@ -10,6 +10,7 @@ const [isSent , setIsSent] = useState(false);
 
 const sendEmail = (e)=>{
 e.preventDefault();
+
 emailjs
 .sendForm(
   "service_ruhy1ua",       //service id
@@ -18,7 +19,7 @@ emailjs
   "IsinmCZHuDzsADyLS"     //public key
 ).then(
   ()=>{
-    isSent(true)
+    setIsSent(true)
     form.current.reset();
     toast.success("Message sent successfully !✅ ",{
       position:'top-right',
@@ -42,13 +43,12 @@ emailjs
      theme:'dark',
     });
   }
-  )
-
+  );
 }
 
   return (
    <section
-   id=""
+   id="contact"
    className="flex flex-col items-center justify-center py-24 px-[12vw] md:px-7[vw] lg:px-[20vw]"
    >
 
